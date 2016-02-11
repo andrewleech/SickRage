@@ -193,14 +193,11 @@ def processDir(dirName, nzbName=None, process_method=None, force=False, is_prior
         result.output += logHelper(u"PostProcessing Path: %s" % path, logger.INFO)
         result.output += logHelper(u"PostProcessing Dirs: %s" % str(dirs), logger.DEBUG)
 
-        videoFiles = [x for x in files if helpers.isMediaFile(x)]
         rarFiles = [x for x in files if helpers.isRarFile(x)]
-        rarContent = ""
-        if rarFiles and not (sickbeard.POSTPONE_IF_NO_SUBS and videoFiles):
-            # Unpack only if video file was not already extracted by 'postpone if no subs' feature
-            rarContent = unRAR(path, rarFiles, force, result)
-            files += rarContent
-        videoInRar = [x for x in rarContent if helpers.isMediaFile(x)] if rarContent else ''
+        rarContent = unRAR(path, rarFiles, force, result)
+        files += rarContent
+        videoFiles = [x for x in files if helpers.isMediaFile(x)]
+        videoInRar = [x for x in rarContent if helpers.isMediaFile(x)]
 
         result.output += logHelper(u"PostProcessing Files: %s" % files, logger.DEBUG)
         result.output += logHelper(u"PostProcessing VideoFiles: %s" % videoFiles, logger.DEBUG)
@@ -248,15 +245,11 @@ def processDir(dirName, nzbName=None, process_method=None, force=False, is_prior
             postpone = SyncFiles and sickbeard.POSTPONE_IF_SYNC_FILES
 
             if not postpone:
-                videoFiles = [x for x in fileList if helpers.isMediaFile(x)]
                 rarFiles = [x for x in fileList if helpers.isRarFile(x)]
-                rarContent = ""
-                if rarFiles and not (sickbeard.POSTPONE_IF_NO_SUBS and videoFiles):
-                    # Unpack only if video file was not already extracted by 'postpone if no subs' feature
-                    rarContent = unRAR(processPath, rarFiles, force, result)
-                    fileList = set(fileList + rarContent)
-
-                videoInRar = [x for x in rarContent if helpers.isMediaFile(x)] if rarContent else ''
+                rarContent = unRAR(processPath, rarFiles, force, result)
+                fileList = set(fileList + rarContent)
+                videoFiles = [x for x in fileList if helpers.isMediaFile(x)]
+                videoInRar = [x for x in rarContent if helpers.isMediaFile(x)]
                 notwantedFiles = [x for x in fileList if x not in videoFiles]
                 if notwantedFiles:
                     result.output += logHelper(u"Found unwanted files: %s" % notwantedFiles, logger.DEBUG)
