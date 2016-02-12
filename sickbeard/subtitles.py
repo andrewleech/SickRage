@@ -146,7 +146,7 @@ def download_subtitles(subtitles_info):  # pylint: disable=too-many-locals, too-
     subtitles_path = get_subtitles_path(subtitles_info['location'])
     video_path = subtitles_info['location']
     
-    # Perfect match = hash score - hearing impaired score - resolution score (subtitle for 720p its the same for 1080p)
+    # Perfect match = hash score - hearing impaired score - resolution score (subtitle for 720p is the same as for 1080p)
     # Perfect match = 215 -1 -1 = 213
     # No-perfect match = series + year + season + episode
     # No-perfect match = 108 + 54 + 18 + 18 = 198
