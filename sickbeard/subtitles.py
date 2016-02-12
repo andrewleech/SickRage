@@ -370,7 +370,7 @@ class SubtitlesFinder(object):
                     except Exception as error:
                         logger.log(u'Couldn\'t remove non release groups from video file. Error: {}'.format
                                    (ex(error)), logger.DEBUG)
-                    if isMediaFile(video_filename):
+                    if isMediaFile(video_filename) and processTV.subtitlesEnabled(video_filename):
                         try:
                             video = subliminal.scan_video(os.path.join(root, video_filename),
                                                           subtitles=False, embedded_subtitles=False)
