@@ -2276,7 +2276,7 @@ class HomePostProcess(Home):
 
             result = processTV.processDir(
                 ss(dir), nzbName, process_method=process_method, force=argToBool(force),
-                is_priority=argToBool(is_priority), ignore_subs=argToBool(ignore_subs), delete_on=argToBool(delete_on), failed=argToBool(failed), proc_type=type
+                is_priority=argToBool(is_priority), delete_on=argToBool(delete_on), failed=argToBool(failed), proc_type=type, ignore_subs=argToBool(ignore_subs)
             )
 
             if quiet is not None and int(quiet) == 1:

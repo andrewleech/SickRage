@@ -1281,9 +1281,9 @@ class CMD_PostProcess(ApiCall):
             "return_data": {"desc": "Returns the result of the post-process"},
             "process_method": {"desc": "How should valid post-processed files be handled"},
             "is_priority": {"desc": "Replace the file even if it exists in a higher quality"},
-            "ignore_subs": {"desc": "Ignore check for associated subtitles if 'postpone if no subs' enabled"},
             "failed": {"desc": "Mark download as failed"},
             "type": {"desc": "The type of post-process being requested"},
+            "ignore_subs": {"desc": "Ignore check for associated subtitles if 'postpone if no subs' enabled"},
         }
     }
 
@@ -1314,7 +1314,7 @@ class CMD_PostProcess(ApiCall):
             self.type = 'manual'
 
         data = processTV.processDir(self.path, process_method=self.process_method, force=self.force_replace,
-                                    is_priority=self.is_priority, ignore_subs=self.ignore_subs, failed=self.failed, proc_type=self.type)
+                                    is_priority=self.is_priority, failed=self.failed, proc_type=self.type, ignore_subs=self.ignore_subs)
 
         if not self.return_data:
             data = ""
